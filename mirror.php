@@ -214,6 +214,26 @@ run_command(
 
 end_group();
 
+start_group( '🎼 Generate composer.json' );
+
+file_put_contents( "$plugin_dir/composer.json", json_encode(
+	[
+		'name' => "woocommerce/$plugin_slug",
+		'version' => $version,
+		'type' => 'wordpress-plugin',
+		'minimum-stability' => 'stable',
+		'require' => [
+			'composer/installers'=> '~1.0 || ~2.0',
+		],
+		'extra' => [
+			'installer-name' => $plugin_slug,
+		],
+	],
+	JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+) );
+
+end_group();
+
 /**
  * Synchronize.
  * 
